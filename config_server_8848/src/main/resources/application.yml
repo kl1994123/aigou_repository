@@ -1,0 +1,19 @@
+server:
+  port: 8848
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+  instance:
+    prefer-ip-address: true
+spring:
+  application:
+    name: aigou-config-server
+  cloud:
+    config:
+      server:
+        git:
+        #这个是从github上配置文件的地址，以后这里就写共享配置中的配置的地址
+          uri: https://github.com/hpyao/aigou-config2.git
+          username: hpyao
+          password: Itsource20180731

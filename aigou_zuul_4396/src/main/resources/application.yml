@@ -1,0 +1,26 @@
+server:
+  port: 4396
+spring:
+  application:
+    name: aigou-zuul-gateway
+eureka:
+  client:
+#    fetch-registry: false
+#    register-with-eureka: false
+    service-url:
+      defaultZone: http://localhost:7001/eureka
+  instance:
+    instance-id: gateway-4396.com #Eureka状态那一列显示显示的名字
+    prefer-ip-address: true
+
+#    下面的是有关网关的配置
+zuul:
+  routes:
+      plat.serviceId: aigou-plat  #这个是需要被替代的方法名，
+#     注意，在配置了网关之后，访问mk要加上方法名的，注意是要小写的
+#     为了避免服务的名称暴露，下面的方法名用来替代原本的方法名
+      plat.path: /plat/**
+#     下面的参数配置了之后，以原本的方法名能够访问的服务都会失效，只能够使用新的方法名访问服务
+# 下面两个注解是需要和routes平级的
+  ignored-services:  "*" #可以一个一个配置,但是很麻烦,用*来通配
+  prefix: "/services" #加上统一前缀
